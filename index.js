@@ -31,7 +31,7 @@ server
           response.setHeader(
             "Set-Cookie",
             `sessionId=${uuidVar}; expires=${new Date(
-              new Date().getTime() + 5000
+              new Date().getTime() + 10000
             ).toGMTString()}`
           );
           response.end();
