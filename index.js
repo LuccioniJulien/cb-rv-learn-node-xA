@@ -28,7 +28,12 @@ server
               return console.log(err);
             }
           });
-          response.setHeader("Set-Cookie", `sessionId=${uuidVar}`);
+          response.setHeader(
+            "Set-Cookie",
+            `sessionId=${uuidVar}; expires=${new Date(
+              new Date().getTime() + 5000
+            ).toGMTString()}`
+          );
           response.end();
         });
     } else if (request.method == "GET") {
@@ -49,7 +54,6 @@ server
         console.log(pathSession);
         let headerValue = fs.readFileSync(pathSession);
         response.setHeader("x-my-user-data", `${headerValue}`);
-        request.headers.cookie.maxAge = 5000;
       }
       fs
         .createReadStream(pathName)
